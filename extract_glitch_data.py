@@ -22,7 +22,7 @@ print(' ')
 
 ##total time to collet traces need to be in folder name next to voltage
 
-#source_path = 'C:\\Users\\mo_em\\Desktop\\HV analysis\\13th_run_csv_files'
+#source_path = r''
 folders = os.listdir(source_path)
 
 for folder in folders:
@@ -79,7 +79,7 @@ for folder in folders:
         this_trace_energy = simps(channel_A**2, time, even='avg')
         this_folder_energy_values.append(this_trace_energy)
 
-## this section used to valulate energy for each individual peak, now fetting replaced with seciton ^ that gets energy of whole trace        
+## this section used to evalulate energy for each individual peak, now getting replaced with seciton ^ that gets energy of whole trace        
 #####################################################################################################################
                 ## peak edges finder:
 #            try:
