@@ -13,7 +13,7 @@ from scipy.stats import norm
 plt.style.use('seaborn-whitegrid')
 
 
-save_path = 'C:\\Users\\mo_em\\Desktop\\HV analysis\\images2\\'
+save_path = r''
 
 ## loads the dictionary saved by the extracct_glitch_data file if option 0, if option 1 loads the processed dictionary, option 2 is the final processed dictionary
 def open_dictionary(source_path, option):
