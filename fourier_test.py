@@ -11,15 +11,9 @@ import pickle as pkl
 plt.style.use('seaborn-whitegrid')
 
 
-#source_path = r'C:\Users\mo_em\Desktop\HV analysis\4th_run_csv_files\37kV_19\37kV_21_001.csv'
+source_path = r''
 
-#source_path = r'C:\Users\mo_em\Desktop\HV analysis\8th_run_csv_files\23kV_21\23kV_21_009.csv'
 
-#source_path = r'C:\Users\mo_em\Desktop\HV analysis\4th_run_csv_files\10kV_205\10kV_20.csv'
-
-source_path = r'C:\Users\mo_em\Desktop\HV analysis\4th_run_csv_files\10kV_205\10kV_01.csv'
-
-#source_path = r'C:\Users\mo_em\Desktop\HV analysis\1st_run_csv_files\10kV_152\20220426_10700V_-33mV_01.csv'
 
 current_file = genfromtxt(source_path, delimiter=',')
 current_file = current_file[2:,:]
@@ -45,7 +39,7 @@ plt.show()
 trace_spectrum = rfft(channel_A)
 
 # loading the background trace extraceted below, from a 10k sample trace, from 10kV voltage trace
-f = open(r'C:\Users\mo_em\Desktop\HV analysis\background_spectrum_10k_samples.pkl', 'rb')
+f = open(r'', 'rb')
 background_spectrum = pickle.load(f)
 f.close()
 
@@ -85,81 +79,81 @@ plt.show()
 ## code used to get the background (or the peak spectrum) spectrum to use as a filter (for traces with 10k samples):
 
 # picking out the peak
-#new_indices1 = time > -3
-#new_indices2 = time < 5
-#
-#new_indices = new_indices1 * new_indices2
-#
-#peak_trace = new_indices * channel_A
-#
-#plt.figure(figsize=(8, 7))
-#plt.plot(time, peak_trace, color='k')
-#plt.xlabel('Time (ms)')
-#plt.ylabel('Voltage (mV)')
-#plt.show()
-#
-#
-## subtracting peak from trace to get the background
-#trace_background = channel_A - peak_trace
-#
-#plt.figure(figsize=(8, 7))
-#plt.plot(time, trace_background, color='k')
-#plt.xlabel('Time (ms)')
-#plt.ylabel('Voltage (mV)')
-#plt.show()
-#
-#
-## transforming the full trace:
-#yf_trace = rfft(channel_A)
-##yf_trace = np.abs(yf_trace)
-#
-#plt.figure(figsize=(8, 7))
-#plt.plot(xf, yf_trace)
-#plt.xlabel('Freq (Hz)')
-#plt.ylabel('FFT Amplitude')
-#plt.show()
-#
-##
-#
-## transforming background trace
-#yf_background = rfft(trace_background)
-##yf_background = np.abs(yf_background)
-#
-#plt.figure(figsize=(8, 7))
-#plt.plot(xf, yf_background)
-#plt.xlabel('Freq (Hz)')
-#plt.ylabel('FFT Amplitude')
-#plt.show()
+new_indices1 = time > -3
+new_indices2 = time < 5
+
+new_indices = new_indices1 * new_indices2
+
+peak_trace = new_indices * channel_A
+
+plt.figure(figsize=(8, 7))
+plt.plot(time, peak_trace, color='k')
+plt.xlabel('Time (ms)')
+plt.ylabel('Voltage (mV)')
+plt.show()
 
 
-## trasforming peak trace
-#yf_peak = rfft(peak_trace)
+# subtracting peak from trace to get the background
+trace_background = channel_A - peak_trace
+
+plt.figure(figsize=(8, 7))
+plt.plot(time, trace_background, color='k')
+plt.xlabel('Time (ms)')
+plt.ylabel('Voltage (mV)')
+plt.show()
 
 
-## subtracting both
+# transforming the full trace:
+yf_trace = rfft(channel_A)
+#yf_trace = np.abs(yf_trace)
 
-#yf_clean = yf_trace - yf_peak
-#yf_clean = yf_trace - yf_clean
-#plt.figure(figsize=(8, 7))
-#plt.plot(xf, yf_clean)
-#plt.xlabel('Freq (Hz)')
-#plt.ylabel('FFT Amplitude (clean)')
-#plt.show()
+plt.figure(figsize=(8, 7))
+plt.plot(xf, yf_trace)
+plt.xlabel('Freq (Hz)')
+plt.ylabel('FFT Amplitude')
+plt.show()
+
 #
-#
-#inverse_clean = irfft(yf_clean)
-#plt.figure(figsize=(8, 7))
-#plt.plot(time, inverse_clean, color='k')
-#plt.xlabel('Time (ms)')
-#plt.ylabel('(clean) Voltage (mV)')
-#plt.show()
+
+# transforming background trace
+yf_background = rfft(trace_background)
+#yf_background = np.abs(yf_background)
+
+plt.figure(figsize=(8, 7))
+plt.plot(xf, yf_background)
+plt.xlabel('Freq (Hz)')
+plt.ylabel('FFT Amplitude')
+plt.show()
 
 
-##f = open(r'C:\Users\mo_em\Desktop\HV analysis\background_spectrum.pkl', 'wb')
-##pickle.dump(yf_background, f)
-##f.close()
+# trasforming peak trace
+yf_peak = rfft(peak_trace)
+
+
+# subtracting both
+
+yf_clean = yf_trace - yf_peak
+yf_clean = yf_trace - yf_clean
+plt.figure(figsize=(8, 7))
+plt.plot(xf, yf_clean)
+plt.xlabel('Freq (Hz)')
+plt.ylabel('FFT Amplitude (clean)')
+plt.show()
+
+
+inverse_clean = irfft(yf_clean)
+plt.figure(figsize=(8, 7))
+plt.plot(time, inverse_clean, color='k')
+plt.xlabel('Time (ms)')
+plt.ylabel('(clean) Voltage (mV)')
+plt.show()
+
+
+#f = open(r'', 'wb')
+#pickle.dump(yf_background, f)
+#f.close()
     
     
-##f = open(r'C:\Users\mo_em\Desktop\HV analysis\peak_spectrum.pkl', 'wb')
-##pickle.dump(yf_peak, f)
-##f.close()
+#f = open(r'', 'wb')
+#pickle.dump(yf_peak, f)
+#f.close()
